@@ -45,54 +45,45 @@
 <script>
 import Supplier from "@/components/Supplier.vue";
 import {format} from 'timeago.js';
-import axios from "axios";
 import ErrorLoading from "@/components/ErrorLoading.vue";
+import {useStore} from "@/stores/myStore.js";
+import {computed, onMounted, ref, watch} from "vue";
 
 export default {
   name: "SuppliersList",
-  methods: {
-    format,
-    filteredSelector() {
-      if (this.selected === "Tous les fournisseurs") {
-        this.suppliersCopy = null
-        return this.suppliers;
+  methods: {format},
+  components: {ErrorLoading, Supplier},
+  setup() {
+    const supplierStore = useStore();
+    const selected = ref("Tous les fournisseurs");
+    let suppliersCopy = ref(null);
+    onMounted(() => {
+      supplierStore.fetchSuppliers();
+    });
+
+    watch(selected, () => {
+      filteredSelector();
+      console.log(selected.value);
+    });
+
+    const filteredSelector = () => {
+      if (selected.value === "Tous les fournisseurs") {
+        suppliersCopy.value = null
+        return supplierStore.suppliers;
       } else {
-        this.suppliersCopy = this.suppliers.filter(supplier => supplier.status === 1)
+        suppliersCopy.value = supplierStore.suppliers.filter(supplier => supplier.status === 1)
       }
     }
-  },
-  components: {ErrorLoading, Supplier},
-  data() {
+
     return {
-      suppliers: null,
-      error: null,
-      loading: true,
-      suppliersCopy: null,
+      suppliers: computed(() => supplierStore.suppliers),
+      loading: computed(() => supplierStore.loading),
+      error: computed(() => supplierStore.error),
+      suppliersCopy,
       items: ["Tous les fournisseurs", "Produits en stock"],
-      selected: "Tous les fournisseurs"
-    }
-  },
-  watch: {
-    selected() {
-      this.filteredSelector()
-    },
-  },
-  created() {
-    axios
-        .get("https://suppliers.depembroke.fr/api/suppliers")
-        .then(response => {
-            this.suppliers = response.data.data.map(supplier => ({
-              id: supplier.id,
-              name: supplier.name,
-              status: supplier.status,
-              checkedAt: supplier.checkedAt,
-            }));
-        })
-        .catch(error => this.error = error.message)
-        .finally(() => {
-          this.loading = false;
-        })
-  },
+      selected,
+    };
+  }
 };
 </script>
 
