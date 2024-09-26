@@ -14,7 +14,6 @@ export default {
   data() {
     return {
       suppliers: null,
-      nb: null,
       resellers: null,
       error: null,
       loading: true,
@@ -43,7 +42,6 @@ export default {
                   description: reseller.description,
                 }))
               }))
-          this.nb = this.resellers.length;
           console.log(this.suppliers)
           console.log(this.resellers)
         })
@@ -63,16 +61,6 @@ export default {
         :id="supplier.id"
         :resellers="supplier.resellers">
   </info>
-
-
-<!--  <v-container>-->
-<!--    <v-row>-->
-<!--  <reseller v-for="reseller in resellers[0]['resellers']"-->
-<!--            :name="reseller.name"-->
-<!--            :description="reseller.description">-->
-<!--  </reseller>-->
-<!--    </v-row>-->
-<!--  </v-container>-->
 </template>
 
 <style scoped>

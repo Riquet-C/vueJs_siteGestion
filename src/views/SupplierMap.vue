@@ -1,28 +1,21 @@
 <template>
-  <v-container>
-  <v-row>
-    <v-col class="mt-12">
-      <v-sheet class="pa-4 mt-12" elevation="1" >
-       <p>Carte  des fournisseurs </p>
-      </v-sheet>
-    </v-col>
-  </v-row>
-  </v-container>
+  <div class="container">
+    <h1>Carte des fournisseurs</h1>
+  </div>
   <div class="map-container">
-    <LMap :zoom="zoom" :center="center" style="height: 600px; width: 100%;">
+    <LMap :zoom="zoom" :center="[center[0].latitude, center[0].longitude]" style="height: 600px; width: 100%;">
       <LTileLayer :url=url></LTileLayer>
       <LMarker v-for="supplier in suppliers" :lat-lng="[supplier.latitude, supplier.longitude]"
                :key="supplier.id"></LMarker>
     </LMap>
   </div>
   <ErrorLoading :error="error" :loading="loading"></ErrorLoading>
-
 </template>
 
 <script>
-import {LMap, LMarker, LTileLayer} from "@vue-leaflet/vue-leaflet";
-import axios from 'axios';
 import ErrorLoading from "@/components/ErrorLoading.vue";
+import {LMap, LMarker, LTileLayer} from "@vue-leaflet/vue-leaflet";
+import axios from "axios";
 import {useRoute} from "vue-router";
 
 export default {
@@ -36,7 +29,7 @@ export default {
   data() {
     return {
       zoom: 6,
-      center: [0, 0],
+      center: null,
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
       suppliers: null,
       error: null,
@@ -48,28 +41,24 @@ export default {
     axios
         .get("https://suppliers.depembroke.fr/api/suppliers")
         .then(response => {
-          this.suppliers = response.data.data.map(supplier => ({
-            latitude: supplier.latitude,
-            longitude: supplier.longitude
-          }));
+          this.suppliers = response.data.data
+              .map(supplier => ({
+                latitude: supplier.latitude,
+                longitude: supplier.longitude
+              }));
+          this.center = response.data.data
+              .filter(supplier => supplier.id === this.id)
+              .map(supplier => ({
+                id: supplier.id,
+                latitude: supplier.latitude,
+                longitude: supplier.longitude
+              }));
         })
         .catch(error => this.error = "Erreur dans le chargement des fournisseurs" + error.message)
         .finally(() => {
           this.loading = false;
         })
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-          position => {
-            this.center = [position.coords.latitude, position.coords.longitude]
-          },
-          error => {
-            this.error = error.message
-          }
-      )
-    } else {
-      this.center = [45, 48]
-    }
-  },
+  }
 };
 </script>
 

@@ -6,8 +6,7 @@
           max-width="500"
           v-bind="props"
       >
-        <v-img src="https://aquazolla.com/cdn/shop/files/Spiruline.jpg?v=1726250697"></v-img>
-
+        <v-img :src="image"></v-img>
         <v-card-text>
           <h1>{{ name }}</h1>
           <h3 v-if="status">Produit en stock</h3>
@@ -28,7 +27,9 @@
           <v-btn variant="flat">
             <router-link :to="`/supplier/${id}`">En savoir plus</router-link>
           </v-btn>
-          <v-btn variant="flat">See in Map</v-btn>
+          <v-btn variant="flat">
+            <router-link :to="`/supplierMap/${id}`">See in Map</router-link>
+           </v-btn>
         </v-overlay>
       </v-card>
       </v-col>
@@ -43,6 +44,7 @@ export default {
     status: Number,
     checkedAt: String,
     id: Number,
+    image: String,
   }
 }
 </script>
