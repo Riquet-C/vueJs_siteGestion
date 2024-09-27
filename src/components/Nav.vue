@@ -2,12 +2,13 @@
       <v-app-bar prominent>
         <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Spiruline Shop</v-toolbar-title>
+        <v-toolbar-title>
+          <router-link class="router-link" to="/" >Spiruline Shop</router-link>
+          </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
-
-        <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+        <v-btn class="teal-darken-4" icon="mdi-dots-vertical" variant="text"></v-btn>
       </v-app-bar>
 
       <v-navigation-drawer
@@ -34,9 +35,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .router-link {
   text-decoration: none; /* Supprime le soulignement */
-  color: inherit; /* Prend la couleur du texte parent */
+  color: #004D40; /* Prend la couleur du texte parent */
 }
 </style>

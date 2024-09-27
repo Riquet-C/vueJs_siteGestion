@@ -24,11 +24,11 @@
             scrim="#036358"
             contained
         >
-          <v-btn variant="flat">
-            <router-link :to="`/supplier/${id}`">En savoir plus</router-link>
+          <v-btn color="teal-darken-4  ma-2">
+            <router-link class="router-link" :to="`/supplier/${id}`">En savoir plus</router-link>
           </v-btn>
-          <v-btn variant="flat">
-            <router-link :to="`/supplierMap/${id}`">See in Map</router-link>
+          <v-btn color="teal-darken-4 ma-2">
+            <router-link class="router-link" :to="`/supplierMap/${id}`">See in Map</router-link>
            </v-btn>
         </v-overlay>
       </v-card>
@@ -50,11 +50,16 @@ export default {
 </script>
 
 <style scoped>
+.router-link {
+  text-decoration: none; /* Supprime le soulignement */
+  color: white; /* Prend la couleur du texte parent */
+}
+
 h1 {
-  color: rgba(39, 14, 63, 0.55);
+  color: #00796B;
 }
 
 h3 {
-  color: rgb(156, 117, 196);
+  color: #80CBC4;
 }
 </style>

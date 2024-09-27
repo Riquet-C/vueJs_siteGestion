@@ -11,7 +11,12 @@ export const useStore = defineStore('myStore', {
         async fetchSuppliers() {
             this.loading = true;
             this.error = null;
-            if (this.suppliers.length) return;
+
+            if (this.suppliers.length) {
+                this.loading = false;  // Assurer que loading est réinitialisé
+                return;
+            }
+
             try {
                 const response = await axios.get('https://suppliers.depembroke.fr/api/suppliers');
                 this.suppliers = response.data.data.map(supplier => ({
@@ -28,7 +33,7 @@ export const useStore = defineStore('myStore', {
             } finally {
                 this.loading = false;
             }
-            console.log(this.suppliers);
+            console.log(this.loading);
         }
     }
 })

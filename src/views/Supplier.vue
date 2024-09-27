@@ -6,49 +6,46 @@ import axios from "axios";
 import {useRoute} from "vue-router";
 import Info from "@/components/info.vue";
 import Reseller from "@/components/Reseller.vue";
+import {useStore} from "@/stores/myStore.js";
+import {computed, onMounted, ref} from "vue";
+import reseller from "@/components/Reseller.vue";
 
 export default {
   name: "SupplierInfo",
   methods: {format},
   components: {Reseller, Info, ErrorLoading, Supplier},
-  data() {
+  setup() {
+    const supplierStore = useStore();
+    let id = Number(useRoute().params.id);
+    onMounted(() => {
+      supplierStore.fetchSuppliers();
+    });
     return {
-      suppliers: null,
-      resellers: null,
-      error: null,
-      loading: true,
-      id: Number(useRoute().params.id),
-    }
-  },
-  created() {
-    axios
-        .get("https://suppliers.depembroke.fr/api/suppliers")
-        .then(response => {
-          this.suppliers = response.data.data
-              .filter(supplier => supplier.id === this.id)
-              .map(supplier => ({
-                id: supplier.id,
-                name: supplier.name,
-                status: supplier.status,
-                checkedAt: supplier.checkedAt,
-                resellers: supplier.resellers,
-              }));
-          this.resellers = response.data.data
-              .filter(supplier => supplier.id === this.id)
-              .map(supplier => ({
-                resellers: supplier.resellers.map(reseller => ({
-                  id: reseller.id,
-                  name: reseller.name,
-                  description: reseller.description,
-                }))
+      suppliers: computed(() => {
+        return supplierStore.suppliers
+            .filter(supplier => supplier.id === id)
+            .map(supplier => ({
+              id: supplier.id,
+              name: supplier.name,
+              status: supplier.status,
+              checkedAt: supplier.checkedAt,
+              resellers: supplier.resellers,
+            }));
+      }),
+      resellers: computed(() => {
+         return supplierStore.suppliers
+              .map(reseller => ({
+                id: reseller.id,
+                name: reseller.name,
+                description: reseller.description,
               }))
-          console.log(this.suppliers)
-          console.log(this.resellers)
-        })
-        .catch(error => this.error = error.message)
-        .finally(() => {
-          this.loading = false;
-        })
+      }),
+      loading: computed(() => supplierStore.loading),
+      error: computed(() => supplierStore.error),
+      zoom: 6,
+      id,
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    }
   }
 }
 </script>

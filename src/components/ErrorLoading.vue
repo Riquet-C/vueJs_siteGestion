@@ -2,7 +2,7 @@
 <div v-if="error">
  <p> {{error}} </p>
 </div>
-  <div v-if="loading">
+  <div v-if="loading ">
 <p>Requête en cours...</p>
   </div>
 </template>

@@ -13,6 +13,8 @@ import * as components from 'vuetify/components';
 import * as directives from 'vuetify/directives';
 import {createPinia} from "pinia";
 
+import 'leaflet/dist/leaflet.css'; // CSS de Leaflet
+import * as L from 'leaflet'; // Import explicite de Leaflet
 
 const vuetify = createVuetify({
     components,
