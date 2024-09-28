@@ -4,6 +4,7 @@ export default {
   props: {
     name: String,
     description: String,
+    image: String,
   }
 }
 </script>
@@ -16,8 +17,10 @@ export default {
           max-width="500"
           v-bind="props"
       >
+        <v-img :src="image"></v-img>
+
         <v-card-text>
-          <h1>{{ name }}</h1>
+          <h2 class="teal-darken-4">{{ name }}</h2>
           <p>{{ description }}</p>
         </v-card-text>
 

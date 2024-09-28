@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <v-container class="mt-12">
     <h1>Carte des fournisseurs</h1>
-  </div>
-  <div class="map-container">
+  </v-container>
+  <v-container>
     <LMap :zoom="zoom" :center="[center[0].latitude, center[0].longitude]" style="height: 600px; width: 100%;">
       <LTileLayer :url=url></LTileLayer>
       <LMarker v-for="supplier in suppliers" :lat-lng="[supplier.latitude, supplier.longitude]"
@@ -15,7 +15,7 @@
         </l-popup>
       </LMarker>
     </LMap>
-  </div>
+  </v-container>
   <ErrorLoading :error="error" :loading="loading">
   </ErrorLoading>
 </template>

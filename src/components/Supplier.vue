@@ -8,7 +8,7 @@
       >
         <v-img :src="image"></v-img>
         <v-card-text>
-          <h1>{{ name }}</h1>
+          <h2>{{ name }}</h2>
           <h3 v-if="status">Produit en stock</h3>
           <h3 v-else style="color: #c0504d">Produit en rupture</h3>
           <p>Mise à jour le: {{ checkedAt }}</p>
@@ -55,7 +55,7 @@ export default {
   color: white; /* Prend la couleur du texte parent */
 }
 
-h1 {
+h2 {
   color: #00796B;
 }
 

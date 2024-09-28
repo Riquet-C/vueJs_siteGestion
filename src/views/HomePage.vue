@@ -64,7 +64,7 @@ export default {
                 <v-card-title>{{ product.name }}</v-card-title>
                 <v-card-subtitle>{{ product.description }}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn color="teal-darken-4" @click="viewProduct(product)">Voir produit</v-btn>
+                  <v-btn color="something" @click="viewProduct(product)">Voir produit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -96,5 +96,9 @@ export default {
 .router-link {
   text-decoration: none;
   color: white;
+}
+.something {
+  text-decoration: none;
+  color: rgba(var(--v-theme-on-something), 0.9)
 }
 </style>

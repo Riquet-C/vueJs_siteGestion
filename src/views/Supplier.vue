@@ -56,7 +56,8 @@ export default {
         :checked-at="supplier.checkedAt"
         :status="supplier.status"
         :id="supplier.id"
-        :resellers="supplier.resellers">
+        :resellers="supplier.resellers"
+        :image>
   </info>
 </template>
 
