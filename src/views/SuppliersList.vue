@@ -7,7 +7,6 @@
         </v-sheet>
       </v-col>
     </v-row>
-
     <v-row>
       <v-col>
         <v-select
@@ -21,15 +20,7 @@
   </v-container>
   <v-container>
     <v-row>
-      <supplier v-if="!suppliersCopy" v-for="supplier in suppliers"
-                :key="supplier.id"
-                :name="supplier.name"
-                :status="supplier.status"
-                :id="supplier.id"
-                :checked-at="format(supplier.checkedAt)"
-                :image="`https://picsum.photos/200?random=${supplier.id}`">
-      </supplier>
-      <supplier v-else v-for="supplier in suppliersCopy"
+      <supplier v-if="!suppliersCopy" v-for="supplier in displayedSuppliers"
                 :key="supplier.id"
                 :name="supplier.name"
                 :status="supplier.status"
@@ -38,6 +29,15 @@
                 :image="`https://picsum.photos/200?random=${supplier.id}`">
       </supplier>
     </v-row>
+    <div class="text-center">
+      <v-pagination
+          v-model="page"
+          :length="4"
+          :records="25"
+          :per-page="6"
+          circle
+      ></v-pagination>
+    </div>
   </v-container>
   <ErrorLoading :error="error" :loading="loading"></ErrorLoading>
 </template>
@@ -48,32 +48,40 @@ import {format} from 'timeago.js';
 import ErrorLoading from "@/components/ErrorLoading.vue";
 import {useStore} from "@/stores/myStore.js";
 import {computed, onMounted, ref, watch} from "vue";
+import Pagination from 'v-pagination-3';
 
 export default {
   name: "SuppliersList",
   methods: {format},
-  components: {ErrorLoading, Supplier},
+  components: {ErrorLoading, Supplier, Pagination},
   setup() {
     const supplierStore = useStore();
     const selected = ref("Tous les fournisseurs");
     let suppliersCopy = ref(null);
+    const page = ref(1);
+    const perPage = 6;
+
     onMounted(() => {
       supplierStore.fetchSuppliers();
     });
 
-    watch(selected, () => {
-      filteredSelector();
-      console.log(selected.value);
-    });
-
-    const filteredSelector = () => {
+    const filteredSuppliers = computed(() => {
       if (selected.value === "Tous les fournisseurs") {
         suppliersCopy.value = null
         return supplierStore.suppliers;
       } else {
-        suppliersCopy.value = supplierStore.suppliers.filter(supplier => supplier.status === 1)
+        return supplierStore.suppliers.filter(supplier => supplier.status === 1);
       }
-    }
+    })
+
+    const paginate = (suppliers) => {
+      const start = (page.value - 1) * perPage;
+      return suppliers.slice(start, start + perPage);
+    };
+
+    const displayedSuppliers = computed(() => {
+      return paginate(filteredSuppliers.value);
+    });
 
     return {
       suppliers: computed(() => supplierStore.suppliers),
@@ -82,11 +90,9 @@ export default {
       suppliersCopy,
       items: ["Tous les fournisseurs", "Produits en stock"],
       selected,
+      page,
+      displayedSuppliers
     };
   }
 };
 </script>
-
-<style scoped>
-
-</style>
