@@ -32,7 +32,7 @@
     <div class="text-center">
       <v-pagination
           v-model="page"
-          :length="4"
+          :length="suppliers.length/6"
           :records="25"
           :per-page="6"
           circle
@@ -47,7 +47,7 @@ import Supplier from "@/components/Supplier.vue";
 import {format} from 'timeago.js';
 import ErrorLoading from "@/components/ErrorLoading.vue";
 import {useStore} from "@/stores/myStore.js";
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, ref} from "vue";
 import Pagination from 'v-pagination-3';
 
 export default {

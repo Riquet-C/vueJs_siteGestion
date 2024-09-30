@@ -17,9 +17,15 @@
         <v-card-title>
           <span class="text-primary text-subtitle-2">64 Reviews</span>
         </v-card-title>
-
+        <div
+            @mouseenter="isHovering = true"
+            @mouseleave="isHovering = false"
+            @touchstart="isHovering = true"
+            @touchend="isHovering = false"
+            class="overlay-container"
+        >
         <v-overlay
-            :model-value="!!isHovering"
+            :model-value="isHovering"
             class="align-center justify-center"
             scrim="#036358"
             contained
@@ -31,6 +37,7 @@
             <router-link class="router-link" :to="`/supplierMap/${id}`">See in Map</router-link>
            </v-btn>
         </v-overlay>
+        </div>
       </v-card>
       </v-col>
     </v-hover>

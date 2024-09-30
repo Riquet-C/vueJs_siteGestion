@@ -24,6 +24,9 @@
       <v-list-item hover role="listitem">
         <router-link aria-label="voir la carte" class="router-link" to="/map">Voir la carte</router-link>
       </v-list-item>
+      <v-list-item hover role="listitem">
+        <router-link aria-label="Ajouter un fournisseur" class="router-link" to="/addSupplier">Ajouter un fournisseur</router-link>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
