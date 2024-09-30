@@ -6,7 +6,7 @@
           max-width="500"
           v-bind="props"
       >
-        <v-img :src="image"></v-img>
+        <v-img :src="image" :alt="name" loading="lazy"></v-img>
         <v-card-text>
           <h2>{{ name }}</h2>
           <h3 v-if="status">Produit en stock</h3>

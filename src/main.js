@@ -15,6 +15,7 @@ import {createPinia} from "pinia";
 
 import 'leaflet/dist/leaflet.css'; // CSS de Leaflet
 import * as L from 'leaflet'; // Import explicite de Leaflet
+import './registerServiceWorker'
 
 const vuetify = createVuetify({
     components,

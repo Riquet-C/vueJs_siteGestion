@@ -29,22 +29,38 @@ export default {
 };
 </script>
 
+<style>
+.hero-section {
+  background-image: url('/img/spiruline.webp');
+  background-size: cover;
+  color: #fcf9f9;
+  background-position: center;
+  height: 400px;
+}
+
+.router-link {
+  text-decoration: none;
+  color: white;
+}
+
+</style>
+
 <template>
     <v-app>
-      <v-main>
+      <v-main role="main">
         <v-container fluid class="fill-height d-flex align-center justify-center hero-section">
           <v-row class="text-center">
             <v-col>
-              <h1 class="display-2 font-weight-bold white--text">Bienfaits de la Spiruline</h1>
+              <h1 class="font-weight-bold white--text">Bienfaits de la Spiruline</h1>
               <p class="white--text">Découvrez les vertus d'une algue naturelle pleine de nutriments</p>
-              <v-col>
-                <v-btn color="teal-darken-4">
-                  <router-link class="router-link" to="/suppliers" >Voir la liste de nos fournisseurs</router-link>
+              <v-col role="list">
+                <v-btn color="teal-darken-4" role="listitem" aria-label="Voir la liste de nos fournisseurs">
+                  <router-link aria-label="Voir la liste de nos fournisseurs" class="router-link" to="/suppliers" >Voir la liste de nos fournisseurs</router-link>
                 </v-btn>
               </v-col>
-              <v-col>
-              <v-btn color="teal-darken-4">
-                <router-link class="router-link" to="/map">Voir la carte</router-link>
+              <v-col role="list">
+              <v-btn color="teal-darken-4" role="listitem" aria-label="Voir la carte">
+                <router-link aria-label="Voir la carte" class="router-link" to="/map">Voir la carte</router-link>
               </v-btn>
               </v-col>
             </v-col>
@@ -60,11 +76,11 @@ export default {
           <v-row>
             <v-col v-for="(product, index) in products" :key="index" cols="12" sm="6" md="4">
               <v-card>
-                <v-img :src="product.image" height="200px"></v-img>
+                <v-img :src="product.image" height="200px" :alt="`Image de ${product.name}`" loading="lazy"></v-img>
                 <v-card-title>{{ product.name }}</v-card-title>
                 <v-card-subtitle>{{ product.description }}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn color="something" @click="viewProduct(product)">Voir produit</v-btn>
+                  <v-btn color="something" @click="viewProduct(product)" aria-label="Voir produit">Voir produit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -75,7 +91,7 @@ export default {
             <v-col cols="12">
               <h2>Contactez-nous</h2>
               <p>Vous avez des questions ? N'hésitez pas à nous contacter via notre formulaire ou appelez-nous directement !</p>
-              <v-btn large color="teal-darken-4">Nous contacter</v-btn>
+              <v-btn large color="teal-darken-4" role="link" aria-label="Nous contacter">Nous contacter</v-btn>
             </v-col>
           </v-row>
         </v-container>
@@ -84,21 +100,3 @@ export default {
     </v-app>
 </template>
 
-<style>
-.hero-section {
-  background-image: url('https://imgs.search.brave.com/FsaW_P9LxvP0i8KmMO7-RO0fITRoYfhtD2mm4_3_wpY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bGF2aWVjbGFpcmUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIwLzAxL2RlY291/dnJlei1sYS1zcGly/dWxpbmUuanBnLndl/YnA');
-  background-size: cover;
-  color: white;
-  background-position: center;
-  height: 400px;
-}
-
-.router-link {
-  text-decoration: none;
-  color: white;
-}
-.something {
-  text-decoration: none;
-  color: rgba(var(--v-theme-on-something), 0.9)
-}
-</style>

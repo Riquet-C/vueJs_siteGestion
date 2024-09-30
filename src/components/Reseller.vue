@@ -17,7 +17,7 @@ export default {
           max-width="500"
           v-bind="props"
       >
-        <v-img :src="image"></v-img>
+        <v-img :src="image" :alt="name"></v-img>
 
         <v-card-text>
           <h2 class="teal-darken-4">{{ name }}</h2>

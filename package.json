@@ -2,16 +2,17 @@
   "name": "gestion_stock_vuejs",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite",
+    "preview": "vite preview",
+    "serve": "vite"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.7",
     "pinia": "^2.2.2",
+    "register-service-worker": "^1.7.2",
     "timeago.js": "^4.0.2",
     "v-pagination-3": "^0.1.7",
     "vue": "^3.4.29",
@@ -22,6 +23,8 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "leaflet": "^1.7.1",
-    "vite": "^5.3.1"
-  }
+    "vite": "^5.3.1",
+    "vite-plugin-pwa": "^0.20.5"
+  },
+  "type": "module"
 }
