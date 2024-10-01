@@ -30,14 +30,6 @@
           label="Produit disponible ?"
       ></v-select>
 
-      <!--    <v-checkbox-->
-      <!--        v-model="checkbox.value"-->
-      <!--        :error-messages="checkbox.errorMessage.value"-->
-      <!--        label="Avez-vous verifier les informations renseigné?"-->
-      <!--        type="checkbox"-->
-      <!--        value="1"-->
-      <!--    ></v-checkbox>-->
-
       <v-btn
           class="me-4"
           type="submit"
@@ -63,7 +55,6 @@ const validationSchema = yup.object({
   latitude: yup.string().required('Latitude is required').min(1, 'latitude is required'),
   longitude: yup.string().required('Longitude is required').min(1, 'longitude is required'),
   select: yup.string().required('Please select an item.'),
-  // checkbox: yup.boolean().oneOf([true], 'You must check this box.')
 });
 
 const {handleSubmit, handleReset} = useForm({
@@ -74,7 +65,6 @@ const name = useField('name')
 const select = useField('select')
 const latitude = useField('latitude')
 const longitude = useField('longitude')
-// const checkbox = useField('checkbox')
 
 
 const items = ref([

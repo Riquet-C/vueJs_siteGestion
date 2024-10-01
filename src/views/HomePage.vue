@@ -1,7 +1,11 @@
 <script>
+import Contact from "@/components/Contact.vue";
+
 export default {
+  components: {Contact},
   data() {
     return {
+      dialog: false,
       products: [
         {
           name: "Spiruline en Poudre",
@@ -24,6 +28,12 @@ export default {
   methods: {
     viewProduct(product) {
       alert(`Détails du produit : ${product.name}`);
+    },
+    openDialog() {
+      this.dialog = true;
+    },
+    closeDialog() {
+      this.dialog = false;
     },
   },
 };
@@ -91,12 +101,13 @@ export default {
             <v-col cols="12">
               <h2>Contactez-nous</h2>
               <p>Vous avez des questions ? N'hésitez pas à nous contacter via notre formulaire ou appelez-nous directement !</p>
-              <v-btn large color="teal-darken-4" role="link" aria-label="Nous contacter">Nous contacter</v-btn>
+              <v-btn large color="teal-darken-4" @click="openDialog" role="link" aria-label="Nous contacter">Nous contacter</v-btn>
+
             </v-col>
           </v-row>
+          <Contact :isOpen="dialog" @close="closeDialog" />
         </v-container>
       </v-main>
-
     </v-app>
 </template>
 
