@@ -102,7 +102,6 @@ export default {
               <h2>Contactez-nous</h2>
               <p>Vous avez des questions ? N'hésitez pas à nous contacter via notre formulaire ou appelez-nous directement !</p>
               <v-btn large color="teal-darken-4" @click="openDialog" role="link" aria-label="Nous contacter">Nous contacter</v-btn>
-
             </v-col>
           </v-row>
           <Contact :isOpen="dialog" @close="closeDialog" />
