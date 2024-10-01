@@ -1,29 +1,31 @@
 # gestion_stock_vuejs
 
-This template should help get you started developing with Vue 3 in Vite.
+Un site web développé avec Vue.js et Vuetify pour apprendre les bases de ces technologies.
 
-## Recommended IDE Setup
+## Démo
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Vous pouvez voir le projet en ligne à cette adresse : [Chic Marigold](https://main--chic-marigold-a9416e.netlify.app/)
 
-## Customize configuration
+## Technologies Utilisées
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- [Vue.js](https://vuejs.org/) - Framework JavaScript
+- [Vuetify](https://vuetifyjs.com/en/) - Framework de composants Material Design pour Vue.js
+- [Netlify](https://www.netlify.com/) - Hébergement du site
+  
+## Installation
 
-## Project Setup
+Pour installer ce projet sur votre machine locale, suivez ces étapes :
 
-```sh
-npm install
-```
+1. Clonez le dépôt :
+   ```bash
+   git clone https://github.com/votre-utilisateur/votre-repo.git
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+2. Installer les dépendances :
+   
+    ```sh
+    npm install
+    ```
+3. démarrer le projet en mode développement :
+   ```sh
+   npm run serve
+   ```
