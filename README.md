@@ -29,3 +29,10 @@ Pour installer ce projet sur votre machine locale, suivez ces étapes :
    ```sh
    npm run serve
    ```
+## Fonctionnalités
+- Page d'accueil avec articles
+- Formulaire de contact fonctionnel
+- Liste des fournisseurs avec tri
+- Carte générale
+- Carte ciblée sur le fournisseur cliqué
+- Ajout de fournisseurs à la BDD
