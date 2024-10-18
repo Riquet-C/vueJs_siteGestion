@@ -36,3 +36,4 @@ Pour installer ce projet sur votre machine locale, suivez ces étapes :
 - Carte générale
 - Carte ciblée sur le fournisseur cliqué
 - Ajout de fournisseurs à la BDD
+- Mode clair / Mode dark
